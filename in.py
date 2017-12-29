@@ -3,13 +3,14 @@ import re
 import argparse
 from saveAndLoad import SaveAndLoad
 
-parser = argparse.ArgumentParser(description="analyses files and makes the data used by out.py")
+parser = argparse.ArgumentParser(description="analyses file and creates a JSON file used by out.py")
 
-parser.add_argument('file_loc', type=str, help="text location")
+parser.add_argument('file_loc', type=str, help="path to text file you want to analyze")
 group = parser.add_mutually_exclusive_group(required=True)
-group.add_argument('-o', type=str, default='', metavar='FILE',  help='reads data from FILE and overwrites it')
-group.add_argument('-r', type=str, default=[], nargs=2, metavar='FILE',
-                   help='reads data from first arg and writes to the second')
+group.add_argument('-o', type=str, default='', metavar='FILE',  help='reads data from FILE and overwrites it, if the '
+                                                                     'file does not exist it will be created')
+group.add_argument('-r', type=str, default=[], nargs=2, metavar='FILE', help='reads data from first arg and writes to '
+                                                                             'the second')
 group.add_argument('-w', type=str, default='', metavar='FILE', help='writes to FILE')
 args = parser.parse_args()
 
