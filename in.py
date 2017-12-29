@@ -1,37 +1,45 @@
 #!/usr/bin/env python3
 import re
-
+import argparse
 from saveAndLoad import SaveAndLoad
 
-fileLoc = input("what is the path to the file you want to analyse?: ")
+parser = argparse.ArgumentParser(description="analyses files and makes the data used by out.py")
+
+parser.add_argument('file_loc', type=str, help="text location")
+group = parser.add_mutually_exclusive_group(required=True)
+group.add_argument('-o', type=str, default='', metavar='FILE',  help='reads data from FILE and overwrites it')
+group.add_argument('-r', type=str, default=[], nargs=2, metavar='FILE',
+                   help='reads data from first arg and writes to the second')
+group.add_argument('-w', type=str, default='', metavar='FILE', help='writes to FILE')
+args = parser.parse_args()
+
+fileLoc = args.file_loc
+
+if len(args.r) == 2:
+    datafile_name_in = args.r[0]
+    datafile_name_out = args.r[1]
+elif len(args.o) != 0:
+    datafile_name_in = args.o
+    datafile_name_out = datafile_name_in
+else:
+    datafile_name_in = ''
+    datafile_name_out = args.w
+
+my_obj = SaveAndLoad(datafile_name_in)
+
 fileN = open(fileLoc, "r")
 
-overwrite_file = 'n'
-file_name_in = 'standardFile.json'
-
-load_or_not = input("Read data from existing file? [y/n]")
-if load_or_not == "y":
-    file_name_in = input("what is the path to the file?")
-    my_obj = SaveAndLoad(file_name_in)
-    overwrite_file = input('overwrite file when saving? [y/n]')
-else:
-    my_obj = SaveAndLoad()
-
-if overwrite_file == 'y':
-    file_name_out = file_name_in
-else:
-    file_name_out = input('What is the name of the file I will write my data to? (I will overwrite it)')
 
 for line in fileN:
     line = line.split()
     for word in line:
         i = 0
         word = re.sub('[^a-zA-Z]', '', word.lower())
-        my_obj.add_word_length(len(word))
         word = word.center(len(word) + 2)
 
         while i < len(word)-1:
             my_obj.add(word[i:i + 2])
             i += 1
 
-my_obj.save_to_file(file_name_out)
+
+my_obj.save_to_file(datafile_name_out)
