@@ -38,4 +38,4 @@ optional arguments:
 - saveAndLoad.py:
 help class used by both in.py and out.py
 - cleanup.sh:
-a simple shell script to cleanup books from project guthenberg
+a simple shell script to cleanup books from [project gutenberg](https://www.gutenberg.org/)
