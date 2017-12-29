@@ -39,10 +39,17 @@ while times > 0:
         if previous_char != ' ':
             word += previous_char
 
-        if previous_char == ' ' and min_word_length <= len(word):
+        # in case the l option is used
+        if args.l > 0 and len(word) == args.l:
+            break
+
+        # in case the l option isn't used, the word has the minimum length and the privious character is a space
+        if previous_char == ' ' and min_word_length <= len(word) and args.l <= 0:
             break
         else:
             continue
+
+        # yes I know these two if statements can be combined but it is more readable this way.
 
     print(word)
     times -= 1
