@@ -36,10 +36,14 @@ my_obj = SaveAndLoad(file_in)
 while times > 0:
     while True:
         previous_char = random.choices(my_obj.give_keys(previous_char), weights=my_obj.give_values(previous_char))[0]
-        word += previous_char
-        if previous_char == ' ':
+        if previous_char != ' ':
+            word += previous_char
+
+        if previous_char == ' ' and min_word_length <= len(word):
             break
-    if min_word_length <= len(word):
-        print(word)
-        times -= 1
+        else:
+            continue
+
+    print(word)
+    times -= 1
     word = ''
