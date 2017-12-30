@@ -1,5 +1,7 @@
-# generated JSON files
+# this file
+.gitignore
 
+# generated JSON files
 *.json
 !english.json
 # Byte-compiled / optimized / DLL files
