@@ -11,9 +11,9 @@ over_arching_group.add_argument('-s', action='store_true', default=False,
                                 help='generate a sentence instead of just a word it will overwrite all other settings. '
                                      'The -f option has to be set when using this')
 
-parser.add_argument('-t', default=17, help='set a precise sentence length, only required if the -s option is used')
+parser.add_argument('-t', default=17, type=int,  help='set a precise sentence length, only required if the -s option is used')
 parser.add_argument('-f', help='sentence file location, only needed if -s option is used')
-parser.add_argument('-w', default=5, help='starting word length, only needed if the -s option is used')
+parser.add_argument('-w', default=5, type=int,  help='starting word length, only needed if the -s option is used')
 
 group2 = over_arching_group.add_mutually_exclusive_group()
 group2.add_argument('-a', type=int, default=1, help='generates a set amount of pseudo random words')

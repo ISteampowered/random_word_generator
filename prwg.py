@@ -119,6 +119,8 @@ class Prwg:
                 else:
                     print(sentence)
 
+                exit(0)
+
         word = Prwg.__generate_word(file_in, min_word_length=min_word_length, precise_word_length=precise_word_length)
 
         if return_string:
