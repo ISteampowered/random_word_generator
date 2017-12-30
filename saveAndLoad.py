@@ -63,4 +63,20 @@ class SaveAndLoad:
         """
         return list(self.give_row(key).values())
 
+    def pretty_print(self):
+        """
+        prints the data contained in this object in a tab seperated way, usefull for importing it in a
+        spreadsheet program. (spoilers: it probably wont actually look anywhere near pretty in the console
+        """
+        keys = list(self.big_list.keys())
+        print('\t', end='')
+        for key in keys:
+            print(key, end='\t')
+        print()
+        for key in keys:
+            print(key, end='\t')
+            for key2 in keys:
+                print(self.big_list.get(key).get(key2, 0), end='\t')
+            print()
+
     # TODO: pretty print it to the console for easy data import to a spreadsheet program
