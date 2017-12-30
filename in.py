@@ -5,8 +5,8 @@ from prwg import Prwg
 parser = argparse.ArgumentParser(description="analyses file and creates a JSON file used by out.py")
 
 parser.add_argument('file_loc', type=str, help="path to text file you want to analyze")
-parser.add_argument('-s', type=str, action='store_true', default=False,
-                    help="if you want to analyze the length of the words")
+parser.add_argument('-s', action='store_true', default=False,
+                 help="if you want to analyze the length of the words")
 
 group = parser.add_mutually_exclusive_group(required=True)
 group.add_argument('-o', type=str, default='', metavar='FILE',
