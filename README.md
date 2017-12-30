@@ -1,6 +1,6 @@
 # PRWG (Pseudo Random Word Generator)
 
-A small and flexible pseudo random word generator using a markov chain.
+A overcomplicated and flexible pseudo random word generator using a markov chain.
 
 - prwg.py:
 ```

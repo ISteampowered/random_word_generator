@@ -53,6 +53,8 @@ class Prwg:
         if give_object:
             return my_obj
 
+        # TODO: add option to analyze based on the two previous letters instead of just one
+
     @staticmethod
     def __generate_word(file_in, precise_word_length=-1, min_word_length=0):
         previous_char = ' '
