@@ -18,10 +18,10 @@ class SaveAndLoad:
         with open(file_name) as fileN:
             self.big_list = json.load(fileN)
 
-    def __init__(self, *file_loc):
+    def __init__(self, file_loc=''):
         self.big_list = {}
-        if len(file_loc) == 1 and file_loc[0] != '':
-            self.__load_from_file(file_loc[0])
+        if file_loc != '':
+            self.__load_from_file(file_loc)
 
     def print_self(self):
         print(self.big_list)
