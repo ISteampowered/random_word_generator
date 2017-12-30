@@ -1,7 +1,7 @@
 # generated JSON files
 
 *.json
-
+!english.json
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
