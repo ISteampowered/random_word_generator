@@ -79,4 +79,3 @@ class SaveAndLoad:
                 print(self.big_list.get(key).get(key2, 0), end='\t')
             print()
 
-    # TODO: pretty print it to the console for easy data import to a spreadsheet program
