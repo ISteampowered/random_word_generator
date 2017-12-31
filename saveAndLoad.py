@@ -69,6 +69,11 @@ class SaveAndLoad:
         spreadsheet program. (spoilers: it probably wont actually look anywhere near pretty in the console
         """
         keys = list(self.big_list.keys())
+        keys2 = keys.copy()
+        for key in keys:
+            keys2 += self.give_keys(key)
+        keys = list(set(keys2))
+        keys.sort()
         print('\t', end='')
         for key in keys:
             print(key, end='\t')
@@ -76,6 +81,9 @@ class SaveAndLoad:
         for key in keys:
             print(key, end='\t')
             for key2 in keys:
-                print(self.big_list.get(key).get(key2, 0), end='\t')
+                print(self.big_list.get(key, {}).get(key2, 0), end='\t')
             print()
+
+    def give_dictionary(self):
+        return self.big_list
 
