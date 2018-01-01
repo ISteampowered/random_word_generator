@@ -75,8 +75,8 @@ class Prwg:
 
                 i = 0
                 while i < len(word) - look_back_amount:
-                    a = (word[i:i + look_back_amount], word[i + look_back_amount:i + look_back_amount + 1])
-                    my_obj.add(a)
+                    a, b = (word[i:i + look_back_amount], word[i + look_back_amount:i + look_back_amount + 1])
+                    my_obj.add(**{a: b})
                     i += 1
 
         if datafile_name_out != '':
@@ -85,7 +85,6 @@ class Prwg:
             return my_obj
 
         # TODO: add option to analyze based on the n preceding characters instead of just one
-
 
     @staticmethod
     def __generate_word(file_in, precise_word_length=-1, min_word_length=0):

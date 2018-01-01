@@ -11,15 +11,15 @@ class SaveAndLoad:
     The file format is JSON
     """
 
-    def add(self, tuple_value):
+    def add(self, **tuple_values):
         """
         adds a tuple value to the data
-        :param tuple_value: The tuple value that you want to store
+        :param tuple_values: The tuple values that you want to store
         """
-        first_letter, second_letter = tuple_value
-        row = self.big_list.get(first_letter, {})
-        row[second_letter] = row.get(second_letter, 0) + 1
-        self.big_list[first_letter] = row
+        for key, value in tuple_values.items():
+            row = self.give_row(key)
+            row[value] = row.get(value, 0) + 1
+            self.big_list[key] = row
 
     def save_to_file(self, file_name):
         """
