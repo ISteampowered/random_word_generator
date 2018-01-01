@@ -44,7 +44,7 @@ class Prwg:
             return my_obj
 
     @staticmethod
-    def analyse(file_loc, datafile_name_out='', over_write=False, datafile_name_in='', give_object=False):
+    def analyse(file_loc, datafile_name_out='', over_write=False, datafile_name_in='', give_object=False, look_back_amount=1):
 
         """
         analyse a text file based on what letters follow each other
@@ -54,6 +54,7 @@ class Prwg:
         :param datafile_name_in: the path to a JSON file that you want to load before you analyse anything
         :param over_write: write the data to the JSON FILE where you read the data from
         :param give_object: if you want the saveAndLoad object to be returned
+        :param look_back_amount: look at the n previous characters
         """
         if over_write:
             datafile_name_out = datafile_name_in
@@ -62,17 +63,20 @@ class Prwg:
             raise IOError('No data output given.')
 
         my_obj = SaveAndLoad(file_loc=datafile_name_in)
+
         file_in = open(file_loc, "r")
 
         for line in file_in:
             line = line.split()
             for word in line:
-                i = 0
+
                 word = word.lower()
                 word = word.center(len(word) + 2)
 
-                while i < len(word)-1:
-                    my_obj.add(word[i:i + 2])
+                i = 0
+                while i < len(word) - look_back_amount:
+                    a = (word[i:i + look_back_amount], word[i + look_back_amount:i + look_back_amount + 1])
+                    my_obj.add(a)
                     i += 1
 
         if datafile_name_out != '':
@@ -81,6 +85,7 @@ class Prwg:
             return my_obj
 
         # TODO: add option to analyze based on the n preceding characters instead of just one
+
 
     @staticmethod
     def __generate_word(file_in, precise_word_length=-1, min_word_length=0):

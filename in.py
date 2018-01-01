@@ -28,5 +28,7 @@ else:
     datafile_name_in = ''
     datafile_name_out = args.w
 
-Prwg.analyse(fileLoc, datafile_name_out=datafile_name_out, datafile_name_in=datafile_name_in,
-             analyze_word_length=args.s)
+if args.s:
+    Prwg.analyse_word_length(fileLoc, datafile_name_out=datafile_name_out, datafile_name_in=datafile_name_in)
+else:
+    Prwg.analyse(fileLoc, datafile_name_out=datafile_name_out, datafile_name_in=datafile_name_in)
