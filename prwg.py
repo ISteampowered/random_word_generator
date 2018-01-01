@@ -12,16 +12,15 @@ class Prwg:
     """
 
     @staticmethod
-    def analyse(file_loc, datafile_name_out='', over_write=False, datafile_name_in='', give_object=False, analyze_word_length=False):
+    def analyse_word_length(file_loc, datafile_name_out='', over_write=False, datafile_name_in='', give_object=False):
         """
-        analyse a text file and generate data used by the generate function
+        analyze the text file based on word length
 
         :param file_loc: the path to the text file you want to analyse
         :param datafile_name_out: the path to the JSON file where you want the data to be written
         :param datafile_name_in: the path to a JSON file that you want to load before you analyse anything
         :param over_write: write the data to the JSON FILE where you read the data from
         :param give_object: if you want the saveAndLoad object to be returned
-        :param analyze_word_length: analyzes what length comes after what, instead of what letter comes after what.
         """
         if over_write:
             datafile_name_out = datafile_name_in
@@ -36,24 +35,52 @@ class Prwg:
         for line in file_in:
             line = line.split()
             for word in line:
-                i = 0
-                word = word.lower()
-                word = word.center(len(word) + 2)
-
-                if analyze_word_length:
-                    my_obj.add((previous_length, len(word)-2))
-                    previous_length = len(word)-2
-                else:
-                    while i < len(word)-1:
-                        my_obj.add(word[i:i + 2])
-                        i += 1
+                my_obj.add((previous_length, len(word)))
+                previous_length = len(word)
 
         if datafile_name_out != '':
             my_obj.save_to_file(datafile_name_out)
         if give_object:
             return my_obj
 
-        # TODO: add option to analyze based on the two previous letters instead of just one
+    @staticmethod
+    def analyse(file_loc, datafile_name_out='', over_write=False, datafile_name_in='', give_object=False):
+
+        """
+        analyse a text file based on what letters follow each other
+
+        :param file_loc: the path to the text file you want to analyse
+        :param datafile_name_out: the path to the JSON file where you want the data to be written
+        :param datafile_name_in: the path to a JSON file that you want to load before you analyse anything
+        :param over_write: write the data to the JSON FILE where you read the data from
+        :param give_object: if you want the saveAndLoad object to be returned
+        """
+        if over_write:
+            datafile_name_out = datafile_name_in
+
+        if datafile_name_out == '' and not give_object:
+            raise IOError('No data output given.')
+
+        my_obj = SaveAndLoad(file_loc=datafile_name_in)
+        file_in = open(file_loc, "r")
+
+        for line in file_in:
+            line = line.split()
+            for word in line:
+                i = 0
+                word = word.lower()
+                word = word.center(len(word) + 2)
+
+                while i < len(word)-1:
+                    my_obj.add(word[i:i + 2])
+                    i += 1
+
+        if datafile_name_out != '':
+            my_obj.save_to_file(datafile_name_out)
+        if give_object:
+            return my_obj
+
+        # TODO: add option to analyze based on the n preceding characters instead of just one
 
     @staticmethod
     def __generate_word(file_in, precise_word_length=-1, min_word_length=0):
