@@ -35,7 +35,7 @@ class Prwg:
         for line in file_in:
             line = line.split()
             for word in line:
-                my_obj.add((previous_length, len(word)))
+                my_obj.add(**{previous_length: len(word)})
                 previous_length = len(word)
 
         if datafile_name_out != '':
