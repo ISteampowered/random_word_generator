@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import json
-
+import operator
 
 class SaveAndLoad:
 
@@ -86,4 +86,42 @@ class SaveAndLoad:
 
     def give_dictionary(self):
         return self.big_list
+
+    @staticmethod
+    def __combine_dicts(a, b):
+        return dict(list(a.items()) + list(b.items()) + [(k, a[k] + b[k]) for k in set(b) & set(a)])
+
+    def combine_self(self, *datafiles_name_in):
+
+        for datafile_name_in in datafiles_name_in:
+            merge_file_obj = SaveAndLoad(datafile_name_in)
+            for key in merge_file_obj.give_dictionary().keys():
+                self.__combine_row(key, merge_file_obj.give_row(key))
+
+    def __combine_row(self, key, row):
+        self.big_list[key] = self.__combine_dicts(self.big_list.get(key, {}), row)
+
+    @staticmethod
+    def combine(datafile_name_out='', *datafiles_name_in):
+        """
+        combines two or more datafiles
+        :param  datafile_name_out: the name of the JSON file where the combined data will be stored
+        :param  datafiles_name_in: all the datafiles you want to combine
+        :return returns an SaveAndLoad object that contains the merged data from all datafiles
+        """
+
+        if len(datafiles_name_in) < 2:
+            raise IOError('at least 2 file must be given in order to merge')
+
+        datafiles_name_in = list(datafiles_name_in)
+        save_and_load_obj = SaveAndLoad(datafiles_name_in[0])
+        datafiles_name_in.pop(0)
+
+        save_and_load_obj.combine_self(*datafiles_name_in)
+
+        if datafile_name_out != '':
+            save_and_load_obj.save_to_file(datafile_name_out)
+
+        return save_and_load_obj
+
 
