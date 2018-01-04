@@ -92,7 +92,7 @@ class Prwg:
         :param file_in: path to the JSON file
         :param min_word_length: the minimum length of the word
         :param precise_word_length: if you want to generate words with a precise length
-        :param print: print word to terminal
+        :param print_to_terminal: print word to terminal
         :return: a pseudo random word
         """
         previous_char = ' '
