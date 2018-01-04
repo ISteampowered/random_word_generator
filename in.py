@@ -7,16 +7,16 @@ parser = argparse.ArgumentParser(description="analyses file and creates a JSON f
 parser.add_argument('file_loc', type=str, help="path to text file you want to analyze")
 
 group2 = parser.add_mutually_exclusive_group()
-group2.add_argument('-s', action='store_true', default=False,
+group2.add_argument('-s', '--', action='store_true', default=False,
                     help="if you want to analyze the length of the words")
-group2.add_argument('-l', type=int, default=1, help='sets the look back')
+group2.add_argument('-l', '--look-back-amount', type=int, default=1, help='sets the look back')
 
 group = parser.add_mutually_exclusive_group(required=True)
-group.add_argument('-o', type=str, default='', metavar='FILE',
+group.add_argument('-o', '--over-write', type=str, default='', metavar='FILE',
                    help='reads data from FILE and overwrites it, if the file does not exist it will be created')
-group.add_argument('-r', type=str, default=[], nargs=2, metavar='FILE',
+group.add_argument('-r', '--read-from-write-to', type=str, default=[], nargs=2, metavar='FILE',
                    help='reads data from first arg and writes to the second')
-group.add_argument('-w', type=str, default='', metavar='FILE', help='writes to FILE')
+group.add_argument('-w', '--write-to', type=str, default='', metavar='FILE', help='writes to FILE')
 args = parser.parse_args()
 
 # TODO: add double dash flags
