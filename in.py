@@ -18,7 +18,6 @@ group.add_argument('-o', '--over-write', action='store_true', default=False,
 group.add_argument('-r', '--read-from', type=str, default='', metavar='FILE', help='reads data from FILE')
 args = parser.parse_args()
 
-# TODO: add double dash flags
 fileLoc = args.file_loc
 datafile_name_out = args.datafile_name
 datafile_name_in = ''
