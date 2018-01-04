@@ -25,6 +25,8 @@ group = over_arching_group.add_mutually_exclusive_group()
 group.add_argument('-m', type=int, default=0, help='set a minimum for the word length')
 group.add_argument('-l', type=int, default=-1, help='set a precise length for the pseudo random word')
 
+# TODO: add double dash flags
+
 
 args = parser.parse_args()
 
@@ -33,11 +35,9 @@ file_in = args.file_loc
 if args.s:
     if args.f == '':
         raise IOError('-f flag not set')
-    Prwg.generate(file_in, return_string=False, generate_sentence=True, sentence_data_file=args.f,
-                  sentence_length=args.t, starting_word_length=args.w)
+    Prwg.generate_sentence(file_in, print_to_terminal=True, sentence_data_file=args.f,
+                           sentence_length=args.t, starting_word_length=args.w)
     exit(0)
-
-
 
 min_word_length = args.m
 
@@ -49,5 +49,5 @@ else:
     times = 1
 
 while times > 0:
-    Prwg.generate(file_in, min_word_length=min_word_length, precise_word_length=args.l, return_string=False)
+    Prwg.generate_word(file_in, min_word_length=min_word_length, precise_word_length=args.l, print_to_terminal=True)
     times -= 1

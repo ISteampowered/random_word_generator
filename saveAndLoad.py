@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import json
-import operator
+
 
 class SaveAndLoad:
 
@@ -124,4 +124,4 @@ class SaveAndLoad:
 
         return save_and_load_obj
 
-
+        # TODO: update readme

@@ -19,6 +19,7 @@ group.add_argument('-r', type=str, default=[], nargs=2, metavar='FILE',
 group.add_argument('-w', type=str, default='', metavar='FILE', help='writes to FILE')
 args = parser.parse_args()
 
+# TODO: add double dash flags
 fileLoc = args.file_loc
 
 if len(args.r) == 2:
@@ -36,3 +37,4 @@ if args.s:
 else:
     Prwg.analyse(fileLoc, datafile_name_out=datafile_name_out, datafile_name_in=datafile_name_in,
                  look_back_amount=args.l)
+
