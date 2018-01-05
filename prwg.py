@@ -45,7 +45,7 @@ class Prwg:
 
     @staticmethod
     def analyse(file_loc, datafile_name_out='', over_write=False, datafile_name_in='', give_object=False,
-                look_back_amount=1):
+                look_back_amount=1, look_forward_amount=1):
 
         """
         analyse a text file based on what letters follow each other
@@ -55,6 +55,7 @@ class Prwg:
         :param over_write: write the data to the JSON FILE where you read the data from
         :param give_object: if you want the saveAndLoad object to be returned
         :param look_back_amount: look at the n previous characters
+        :param look_forward_amount: look at the n next characters
         """
         if over_write:
             datafile_name_out = datafile_name_in
@@ -74,8 +75,9 @@ class Prwg:
                 word = word.center(len(word) + 2)
 
                 i = 0
-                while i < len(word) - look_back_amount:
-                    a, b = (word[i:i + look_back_amount], word[i + look_back_amount:i + look_back_amount + 1])
+                while i < len(word) - look_back_amount - look_forward_amount:
+                    a = word[i:i + look_back_amount]
+                    b = word[i + look_back_amount:i + look_back_amount + look_forward_amount]
                     my_obj.add(**{a: b})
                     i += 1
 
