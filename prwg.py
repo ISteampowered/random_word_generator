@@ -77,7 +77,7 @@ class Prwg:
                 word = word.center(len(word) + 2)
 
                 i = 0
-                while i < len(word) - look_back_amount - look_forward_amount:
+                while i < len(word) - look_back_amount - look_forward_amount + 1:
                     a = word[i:i + look_back_amount]
                     b = word[i + look_back_amount:i + look_back_amount + look_forward_amount]
                     my_obj.add(**{a: b})
