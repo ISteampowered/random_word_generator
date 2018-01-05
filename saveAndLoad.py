@@ -124,8 +124,6 @@ class SaveAndLoad:
 
         return save_and_load_obj
 
-        # TODO: update readme
-
     __lookback_amount = -1
     __lookforward_amount = -1
 
