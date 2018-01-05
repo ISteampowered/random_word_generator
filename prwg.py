@@ -113,7 +113,7 @@ class Prwg:
                 chance_dict = Prwg.__combine_dicts(chance_dict, SaveAndLoad(file).give_row(key), b_weight=weight)
 
             next_char = random.choices(chance_dict.keys(), weights=chance_dict.values())[0]
-            if next_char != ' ':
+            if next_char[-1:] != ' ':
                 word += next_char
 
             # in case the l option is used
