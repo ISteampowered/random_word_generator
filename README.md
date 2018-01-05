@@ -211,4 +211,4 @@ usage: cleanup.sh file_loc
 ```
 a simple shell script to cleanup plain text files from [project gutenberg](https://www.gutenberg.org/)
 
-the three json files where generated based on english text with 1, 2 and 3 as lookback amount
+the three json files where generated based on english text with 1, 2 and 3 as lookback amount. the english_sentece json file can be used for generate_sentence
