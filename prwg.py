@@ -62,7 +62,10 @@ class Prwg:
         if datafile_name_out == '' and not give_object:
             raise IOError('No data output given.')
 
-        my_obj = SaveAndLoad(file_loc=datafile_name_in)
+        try:
+            my_obj = SaveAndLoad(file_loc=datafile_name_in)
+        except FileNotFoundError:
+            my_obj = SaveAndLoad()
 
         file_in = open(file_loc, "r")
 
