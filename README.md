@@ -1,6 +1,7 @@
 # PRWG (Pseudo Random Word Generator)
 
 A slightly overcomplicated and flexible pseudo random word generator using a markov chain.
+Uses UTF-8.
 
 - prwg.py:
 ```
@@ -208,4 +209,4 @@ optional arguments:
 ```
 usage: cleanup.sh file_loc
 ```
-a simple shell script to cleanup books from [project gutenberg](https://www.gutenberg.org/)
+a simple shell script to cleanup plain text files from [project gutenberg](https://www.gutenberg.org/)
