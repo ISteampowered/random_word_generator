@@ -126,28 +126,28 @@ class SaveAndLoad:
 
         # TODO: update readme
 
-    __n_value = -1
-    __m_value = -1
+    __lookback_amount = -1
+    __lookforward_amount = -1
 
-    def give_N(self):
+    def give_lookback_amount(self):
         """
         :return: N from N:M if N is the same for the whole file
         """
-        if self.__n_value == -1:
+        if self.__lookback_amount == -1:
             previous_key_length = len(list(self.big_list.keys())[0])
             for key in self.big_list.keys():
                 if len(key) != previous_key_length:
                     raise TypeError('N is not the same for the whole file')
 
-            self.__n_value = previous_key_length
+            self.__lookback_amount = previous_key_length
 
-        return self.__n_value
+        return self.__lookback_amount
 
-    def give_M(self):
+    def give_lookforward_amount(self):
         """
         :return: M from N:M if M is the same for the while file
         """
-        if self.__m_value == -1:
+        if self.__lookforward_amount == -1:
             previous_value_length = len(list((list(self.big_list.values())[0]).keys())[0])
             #gives the length of the first key in the first dictionary containted in big_list
             for dict in self.big_list.values():
@@ -155,6 +155,6 @@ class SaveAndLoad:
                     if len(key) != previous_value_length:
                         raise TypeError('M is not the same for the whole file')
 
-            self.__m_value = previous_value_length
+            self.__lookforward_amount = previous_value_length
 
-        return self.__m_value
+        return self.__lookforward_amount
