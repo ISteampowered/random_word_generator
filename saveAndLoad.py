@@ -125,3 +125,36 @@ class SaveAndLoad:
         return save_and_load_obj
 
         # TODO: update readme
+
+    n_value = -1
+    m_value = -1
+
+    def give_N(self):
+        """
+        :return: N from N:M if N is the same for the whole file
+        """
+        if self.n_value == -1:
+            previous_key_length = len(list(self.big_list.keys())[0])
+            for key in self.big_list.keys():
+                if len(key) != previous_key_length:
+                    raise TypeError('N is not the same for the whole file')
+
+            self.n_value = previous_key_length
+
+        return self.n_value
+
+    def give_M(self):
+        """
+        :return: M from N:M if M is the same for the while file
+        """
+        if self.m_value == -1:
+            previous_value_length = len(list((list(self.big_list.values())[0]).keys())[0])
+            #gives the length of the first key in the first dictionary containted in big_list
+            for dict in self.big_list.values():
+                for key in dict:
+                    if len(key) != previous_value_length:
+                        raise TypeError('M is not the same for the whole file')
+
+            self.m_value = previous_value_length
+
+        return self.m_value
