@@ -111,10 +111,16 @@ class Prwg:
             chance_dict = my_obj.give_row(next_char)
             for file, weight in extra_files.items():
                 look_back_amount = SaveAndLoad(file).give_lookback_amount()
-                key = word[-look_back_amount:]
-                chance_dict = Prwg.__combine_dicts(chance_dict, SaveAndLoad(file).give_row(key), b_weight=weight)
 
-            next_char = random.choices(chance_dict.keys(), weights=chance_dict.values())[0]
+                if len(word) >= look_back_amount:
+                    key = word[-look_back_amount:]
+                else:
+                    key = ' '
+
+                if key != ' ':
+                    chance_dict = Prwg.__combine_dicts(chance_dict, SaveAndLoad(file).give_row(key), b_weight=weight)
+
+            next_char = random.choices(list(chance_dict.keys()), weights=list(chance_dict.values()))[0]
             if next_char[-1:] != ' ':
                 word += next_char
 
