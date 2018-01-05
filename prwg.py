@@ -89,7 +89,7 @@ class Prwg:
             return my_obj
 
     @staticmethod
-    def generate_word(file_in, precise_word_length=-1, min_word_length=0, print_to_terminal=True, **extra_files):
+    def generate_word(file_in, precise_word_length=-1, min_word_length=0, print_to_terminal=False, **extra_files):
         """
         generates a random word
         :param file_in: path to the JSON file. This file should contain data with chunk ration of 1:1 ( if chunk length

@@ -50,7 +50,7 @@ CLASSES
      |       than 1
      |      :return pseudo random sentence
      |  
-     |  generate_word(file_in, precise_word_length=-1, min_word_length=0, print_to_terminal=True, **extra_files)
+     |  generate_word(file_in, precise_word_length=-1, min_word_length=0, print_to_terminal=False, **extra_files)
      |      generates a random word
      |      :param file_in: path to the JSON file. This file should contain data with chunk ration of 1:1 ( if chunk length
      |      is 1 then this simply means what letter follows another)
