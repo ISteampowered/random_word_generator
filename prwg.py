@@ -86,31 +86,40 @@ class Prwg:
             return my_obj
 
     @staticmethod
-    def generate_word(file_in, precise_word_length=-1, min_word_length=0, print_to_terminal=True):
+    def generate_word(file_in, precise_word_length=-1, min_word_length=0, print_to_terminal=True, **extra_files):
         """
         generates a random word
-        :param file_in: path to the JSON file
+        :param file_in: path to the JSON file. This file should contain data with chunk ration of 1:1 ( if chunk length
+        is 1 then this simply means what letter follows another)
         :param min_word_length: the minimum length of the word
         :param precise_word_length: if you want to generate words with a precise length
         :param print_to_terminal: print word to terminal
+        :param extra_files: key value pairs where the key is the extra file location and the value is the weight you
+        want to give it. the weight of file_in is one. these may contain data with chunk ratio N:1
         :return: a pseudo random word
         """
-        previous_char = ' '
+        next_char = ' '
         word = ''
         my_obj = SaveAndLoad(file_loc=file_in)
 
         while True:
-            previous_char = random.choices(my_obj.give_keys(previous_char),
-                                           weights=my_obj.give_values(previous_char))[0]
-            if previous_char != ' ':
-                word += previous_char
+
+            chance_dict = my_obj.give_row(next_char)
+            for file, weight in extra_files.items():
+                look_back_amount = SaveAndLoad(file).give_lookback_amount()
+                key = word[-look_back_amount:]
+                chance_dict = Prwg.__combine_dicts(chance_dict, SaveAndLoad(file).give_row(key), b_weight=weight)
+
+            next_char = random.choices(chance_dict.keys(), weights=chance_dict.values())[0]
+            if next_char != ' ':
+                word += next_char
 
             # in case the l option is used
             if precise_word_length > 0 and len(word) == precise_word_length:
                 break
 
             # in case the l option isn't used, the word has the minimum length and the previous character is a space
-            if previous_char == ' ' and min_word_length <= len(word) and precise_word_length <= 0:
+            if next_char == ' ' and min_word_length <= len(word) and precise_word_length <= 0:
                 break
             else:
                 continue
@@ -120,6 +129,10 @@ class Prwg:
         if print_to_terminal:
             print(word)
         return word
+
+    @staticmethod
+    def __combine_dicts(a, b, a_weight=1.0, b_weight=1.0):
+        return dict([(k, a_weight*a.get(k, 0) + b_weight*b.get(k, 0)) for k in set(b) | set(a)])
 
     @staticmethod
     def generate_sentence(file_in, print_to_terminal=False, sentence_length=17, sentence_data_file='',
