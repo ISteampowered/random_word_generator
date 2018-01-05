@@ -15,7 +15,6 @@ class Prwg:
     def analyse_word_length(file_loc, datafile_name_out='', over_write=False, datafile_name_in='', give_object=False):
         """
         analyze the text file based on word length
-
         :param file_loc: the path to the text file you want to analyse
         :param datafile_name_out: the path to the JSON file where you want the data to be written
         :param datafile_name_in: the path to a JSON file that you want to load before you analyse anything
@@ -95,8 +94,8 @@ class Prwg:
         :param min_word_length: the minimum length of the word
         :param precise_word_length: if you want to generate words with a precise length
         :param print_to_terminal: print word to terminal
-        :param extra_files: key value pairs where the key is the extra file location and the value is the weight you\
-         want to give it. The weight of file_in is one. These files may contain data with a\
+        :param extra_files: key value pairs where the key is the extra file location and the value is the weight you
+         want to give it. The weight of file_in is one. These files may contain data with a
          lookback amount greater than 1
         :return: a pseudo random word
         """
@@ -146,8 +145,8 @@ class Prwg:
         :param sentence_data_file: the path to the word length data file
         :param sentence_length: the desired length of the sentence
         :param starting_word_length: the length of the first word in the sentence
-        :param extra_files: key value pairs where the key is the extra file location and the value is the weight you\
-         want to give it. The weight of file_in is one. These files may contain data with a lookback amount greater\
+        :param extra_files: key value pairs where the key is the extra file location and the value is the weight you
+         want to give it. The weight of file_in is one. These files may contain data with a lookback amount greater
          than 1
         :return pseudo random sentence
         """
