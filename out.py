@@ -31,7 +31,7 @@ args = parser.parse_args()
 file_in = args.file_loc
 
 if args.s != '':
-    Prwg.generate_sentence(file_in, print_to_terminal=True, sentence_data_file=args.s,
+    Prwg.generate_sentence(file_in=file_in, print_to_terminal=True, sentence_data_file=args.s,
                            sentence_length=args.t, starting_word_length=args.w)
     exit(0)
 
@@ -45,5 +45,5 @@ else:
     times = 1
 
 while times > 0:
-    Prwg.generate_word(file_in, min_word_length=min_word_length, precise_word_length=args.l, print_to_terminal=True)
+    Prwg.generate_word(file_in=file_in, min_word_length=min_word_length, precise_word_length=args.l, print_to_terminal=True)
     times -= 1
