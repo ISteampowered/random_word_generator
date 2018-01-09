@@ -12,20 +12,17 @@ class Prwg:
     """
 
     @staticmethod
-    def analyse_word_length(file_loc, datafile_name_out='', over_write=False, datafile_name_in='', give_object=False):
+    def analyse_word_length(file_loc, datafile_name_out='', over_write=False, datafile_name_in=''):
         """
         analyze the text file based on word length
         :param file_loc: the path to the text file you want to analyse
         :param datafile_name_out: the path to the JSON file where you want the data to be written
         :param datafile_name_in: the path to a JSON file that you want to load before you analyse anything
         :param over_write: write the data to the JSON FILE where you read the data from
-        :param give_object: if you want the saveAndLoad object to be returned
+        :return a SaveAndLoad object
         """
         if over_write:
             datafile_name_out = datafile_name_in
-
-        if datafile_name_out == '' and not give_object:
-            raise IOError('No data output given.')
 
         try:
             my_obj = SaveAndLoad(file_loc=datafile_name_in)
@@ -43,11 +40,11 @@ class Prwg:
 
         if datafile_name_out != '':
             my_obj.save_to_file(datafile_name_out)
-        if give_object:
-            return my_obj
+
+        return my_obj
 
     @staticmethod
-    def analyse(file_loc, datafile_name_out='', over_write=False, datafile_name_in='', give_object=False,
+    def analyse(file_loc, datafile_name_out='', over_write=False, datafile_name_in='',
                 look_back_amount=1, look_forward_amount=1):
 
         """
@@ -56,15 +53,12 @@ class Prwg:
         :param datafile_name_out: the path to the JSON file where you want the data to be written
         :param datafile_name_in: the path to a JSON file that you want to load before you analyse anything
         :param over_write: write the data to the JSON FILE where you read the data from
-        :param give_object: if you want the saveAndLoad object to be returned
         :param look_back_amount: look at the n previous characters
         :param look_forward_amount: look at the n next characters
+        :return a SaveAndLoad object
         """
         if over_write:
             datafile_name_out = datafile_name_in
-
-        if datafile_name_out == '' and not give_object:
-            raise IOError('No data output given.')
 
         try:
             my_obj = SaveAndLoad(file_loc=datafile_name_in)
@@ -89,8 +83,8 @@ class Prwg:
 
         if datafile_name_out != '':
             my_obj.save_to_file(datafile_name_out)
-        if give_object:
-            return my_obj
+
+        return my_obj
 
     @staticmethod
     def generate_word(file_in, precise_word_length=-1, min_word_length=0, print_to_terminal=False, **extra_files):
